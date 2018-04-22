@@ -1,0 +1,11 @@
+Backend Coding Test
+
+Using any language / framework you like. Please let us know how long it took you to solve the problem.
+
+Create a REST service that can:
+1. Given a bank branch IFSC code, get branch details
+2. Given a bank name and city, gets details of all branches of the bank in the city
+
+You can use the data available in this repository in your backend db. Write your service in any language of your choice. Host it in Heroku - you can signup for a free account in Heroku. E.g. Here are steps on how you can get a django app running in Heroku in a few minutes. 
+
+If you have any questions, please feel free to send me an email at siva@fyle.in or call me at 9632200894.
