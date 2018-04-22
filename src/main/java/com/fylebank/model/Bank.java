@@ -28,7 +28,7 @@ public class Bank {
 	String name;
 
 	
-	@OneToMany(mappedBy="bank", cascade = CascadeType.ALL,  fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="bank_id", cascade = CascadeType.ALL,  fetch = FetchType.EAGER)
 	private Set<Branches> branches;
 	
 	public Bank() {

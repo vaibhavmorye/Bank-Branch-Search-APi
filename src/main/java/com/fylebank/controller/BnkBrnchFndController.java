@@ -30,9 +30,7 @@ public class BnkBrnchFndController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public Optional<Bank> getAllBanks(@RequestParam(value = "id") Long id) {
-
 		Optional<Bank> bank = bankRepository.findById(id);
-
 		return bank;
 	}
 
