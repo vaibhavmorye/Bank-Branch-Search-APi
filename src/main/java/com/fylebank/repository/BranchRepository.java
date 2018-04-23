@@ -1,6 +1,5 @@
 package com.fylebank.repository;
 
-
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,10 +11,13 @@ import com.fylebank.model.Branches;
 
 @Repository
 public interface BranchRepository extends JpaRepository<Branches, String> {
-	
+
+	@Query(value = "SELECT ifsc from branches br", nativeQuery = true)
+	List<String> findifsc();
+
 	Branches findByifsc(String ifsc);
-	
-	@Query(value="SELECT br.bank_id,  br.ifsc,  br.branch, br.address, br.city,  br.district,  br.state, b.name FROM banks b join branches br on b.id = br.bank_id where lower(b.name) = lower(:bank_name) AND lower(br.city) = lower(:bank_city)", nativeQuery=true)
+
+	@Query(value = "SELECT br.bank_id,  br.ifsc,  br.branch, br.address, br.city,  br.district,  br.state, b.name FROM banks b join branches br on b.id = br.bank_id where lower(b.name) = lower(:bank_name) AND lower(br.city) = lower(:bank_city)", nativeQuery = true)
 	List<Object[]> findBranchesByCity(@Param("bank_name") String Bank_name, @Param("bank_city") String bank_city);
-	
+
 }

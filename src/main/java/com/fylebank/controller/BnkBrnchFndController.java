@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +36,7 @@ public class BnkBrnchFndController {
 	}
 
 	@RequestMapping(value = "/bank", method = RequestMethod.GET)
-	public List<Branches> getAllBanksCity(@RequestParam(value = "bank_name") String bank_name,
+	public Map<String, List<Branches>> getAllBanksCity(@RequestParam(value = "bank_name") String bank_name,
 			@RequestParam(value = "bank_city") String bank_city) {
 		ArrayList<Branches> branches = new ArrayList<Branches>();
 		List<Object[]> objectBranch = branchRepository.findBranchesByCity(bank_name, bank_city);
@@ -44,15 +45,18 @@ public class BnkBrnchFndController {
 					(String) branch[3], (String) branch[4], (String) branch[5], (String) branch[6]);
 			branches.add(temp);
 		}
-		return branches;
+		 Map<String, List<Branches>> branchAsCity = new HashMap<String, List<Branches>>();
+		 branchAsCity.put("Branches", branches);
+		return branchAsCity;
 	}
-	/*
-	 * @RequestMapping(value="/get-all-ifsc", method= RequestMethod.GET) public
-	 * List<Map<String, Object>> getallifsc(){ Branches branch =
-	 * branchRepository.findByifsc(ifsc);
-	 * 
-	 * return null; }
-	 */
+
+	@RequestMapping(value = "/get-all-ifsc", method = RequestMethod.GET)
+	public Map<String, List<String>>  getallifsc() {
+		List<String> ifscList = branchRepository.findifsc();
+		 Map<String, List<String>> ifsc = new HashMap<String, List<String>>();
+		 ifsc.put("ifsc", ifscList);
+		return ifsc;
+	}
 
 	@RequestMapping(value = "/find-branch", method = RequestMethod.GET)
 	public Branches/* Map<String, Object> */ getBranchFromIFSC(@RequestParam(value = "ifsc") final String ifsc) {
